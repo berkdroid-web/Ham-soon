@@ -22,6 +22,37 @@
   .blink-caret{animation:blink 1s step-end infinite;}
   @keyframes polaroidDropA{0%{transform:translateY(0);}60%{transform:translateY(530px);}80%{transform:translateY(510px);}100%{transform:translateY(520px);}}
   @keyframes polaroidDropB{0%{transform:translateY(0);}60%{transform:translateY(530px);}80%{transform:translateY(510px);}100%{transform:translateY(520px);}}
+  html,body{overflow-x:hidden;max-width:100vw;}
+  *{box-sizing:border-box;}
+
+  @media (max-width:900px){
+    .ham-header{padding:20px 20px !important;gap:12px;flex-wrap:wrap;}
+    .ham-nav{gap:18px !important;flex-wrap:wrap;}
+    .ham-nav a{font-size:14px !important;}
+    .ham-logo-box{padding:6px 12px !important;}
+    .ham-logo-box img{height:48px !important;width:auto !important;}
+    .ham-hero{min-height:560px !important;}
+    .ham-hero-content{left:0 !important;right:0;width:auto !important;max-width:calc(100% - 48px) !important;height:auto !important;top:auto !important;bottom:56px !important;padding:0 24px !important;}
+    .ham-cta-wrap{width:auto !important;height:auto !important;}
+    .ham-headline{width:100% !important;height:auto !important;}
+    .ham-about-grid{grid-template-columns:1fr !important;gap:40px !important;}
+    .ham-about-p{width:100% !important;max-width:100% !important;height:auto !important;}
+    .ham-photo-col{align-items:center !important;}
+    .ham-polaroid-frame{width:min(340px,100%) !important;}
+    .ham-polaroid-photo{width:min(340px,100%) !important;}
+    #about{padding:72px 24px 60px !important;}
+    #services{padding:48px 24px !important;}
+    .ham-services-grid{grid-template-columns:1fr !important;}
+    #work{padding:72px 24px 56px !important;}
+    .ham-work-grid{grid-template-columns:repeat(2,1fr) !important;gap:20px !important;padding:24px 24px 40px !important;}
+    #faq{padding:64px 24px !important;}
+    #contact{padding:72px 24px 64px !important;}
+    .ham-contact-grid{grid-template-columns:1fr !important;gap:48px !important;}
+    .ham-contact-form{width:100% !important;height:auto !important;}
+  }
+  @media (max-width:480px){
+    .ham-work-grid{grid-template-columns:1fr !important;}
+  }
 </style>
 </helmet>
 
@@ -32,14 +63,14 @@
   <span style="font-family:'Inter',sans-serif;font-size:18px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:#C81E2E;transform:scale({{ introScale }});opacity:{{ introOpacity }};transition:transform 850ms cubic-bezier(0.7,0,0.9,0.4), opacity 850ms cubic-bezier(0.7,0,0.9,0.4);">Creative Agency</span>
 </div>
 
-<div style="position:sticky;top:0;width:100%;height:100vh;min-height:720px;overflow:hidden;font-family:'Inter',sans-serif;background:transparent;z-index:1;">
+<div class="ham-hero" style="position:sticky;top:0;width:100%;height:100vh;min-height:720px;overflow:hidden;font-family:'Inter',sans-serif;background:transparent;z-index:1;">
 
   <img src="uploads/sm-2323323.jpg" alt="Photographer and photo collage beam" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;clip-path:{{ beamClip }};transition:clip-path 2000ms cubic-bezier(0.16,1,0.3,1);filter:brightness(1.15) saturate(1.15);">
 
   <img src="uploads/sm-2323323.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(0.97);-webkit-mask-image:linear-gradient(90deg, black 0%, black 24%, transparent 40%);mask-image:linear-gradient(90deg, black 0%, black 24%, transparent 40%);">
 
-  <header style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:32px 48px;">
-    <nav style="display:flex;align-items:center;gap:40px;">
+  <header class="ham-header" style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:32px 48px;">
+    <nav class="ham-nav" style="display:flex;align-items:center;gap:40px;">
       <div style="display:flex;gap:6px;border:1px solid rgba(255,255,255,0.35);border-radius:999px;padding:4px;">
         <button onClick="{{ setEn }}" style="border:none;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:600;cursor:pointer;background:{{ enBg }};color:{{ enColor }};">EN</button>
         <button onClick="{{ setTr }}" style="border:none;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:600;cursor:pointer;background:{{ trBg }};color:{{ trColor }};">TR</button>
@@ -47,16 +78,16 @@
       <a href="#about" style="color:#fff;font-size:16px;font-weight:600;letter-spacing:0.02em;">{{ about }}</a>
       <a href="#contact" style="color:#fff;font-size:16px;font-weight:600;letter-spacing:0.02em;">{{ contact }}</a>
       
-    </nav><div style="background:#fff;border-radius:12px;padding:10px 18px;display:flex;align-items:center;"><img src="assets/ham-logo.png" alt="HAM" style="height: 87px; width: 131px"></div>
+    </nav><div class="ham-logo-box" style="background:#fff;border-radius:12px;padding:10px 18px;display:flex;align-items:center;"><img src="assets/ham-logo.png" alt="HAM" style="height: 87px; width: 131px"></div>
   </header>
 
-  <div style="position: absolute; z-index: 2; left: -21px; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 48px 64px; max-width: 920px; gap: 28px; opacity: {{ fadeOpacity }}; transform: translateY({{ fadeTranslate }}px); top: 489px; width: 836px; height: 192px">
-    <div style="width: 604px; height: 60px">
+  <div class="ham-hero-content" style="position: absolute; z-index: 2; left: -21px; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 48px 64px; max-width: 920px; gap: 28px; opacity: {{ fadeOpacity }}; transform: translateY({{ fadeTranslate }}px); top: 489px; width: 836px; height: 192px">
+    <div class="ham-cta-wrap" style="width: 604px; height: 60px">
       <a href="#work" style="display:inline-flex;align-items:center;gap:10px;background:#C81E2E;color:#fff;font-size:16px;font-weight:600;padding:16px 30px;border-radius:999px;box-shadow:0 8px 24px rgba(200,30,46,0.4);">
         {{ cta }}
         <span style="font-size:18px;">→</span>
       </a>
-    </div><h1 style="margin: 0; font-family: 'Archivo Black',sans-serif; font-size: clamp(40px,6.5vw,88px); line-height: 0.98; color: #fff; text-shadow: 0 4px 24px rgba(0,0,0,0.5); width: 1060px; height: 92px">
+    </div><h1 class="ham-headline" style="margin: 0; font-family: 'Archivo Black',sans-serif; font-size: clamp(40px,6.5vw,88px); line-height: 0.98; color: #fff; text-shadow: 0 4px 24px rgba(0,0,0,0.5); width: 1060px; height: 92px">
       {{ headline }}
     </h1>
   </div>
@@ -64,14 +95,14 @@
 </div>
 
 <div id="about" style="position:relative;z-index:2;background:#fff;padding:120px 48px 100px;">
-  <div style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1.3fr 0.7fr;gap:56px;align-items:start;">
+  <div class="ham-about-grid" style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1.3fr 0.7fr;gap:56px;align-items:start;">
     <div>
       <span style="display:inline-block;background:#fff;color:#C81E2E;border:1px solid #C81E2E;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:8px 16px;border-radius:999px;">{{ aboutEyebrow }}</span>
       <h2 style="margin:24px 0 28px;font-family:'Archivo Black',sans-serif;font-size:clamp(34px,5.5vw,64px);line-height:1.02;color:#111;min-height:1.1em;white-space:pre-line;">{{ aboutTyped }}<span class="blink-caret" style="opacity:{{ caretVisible }};">|</span></h2>
-      <p style="margin: 0 0 18px; font-size: 18px; line-height: 1.6; color: #444; max-width: 560px; opacity: {{ aboutBodyOpacity }}; transition: opacity 500ms ease; width: 561px; height: 69px">{{ aboutP1 }}</p>
-      
+      <p class="ham-about-p" style="margin: 0 0 18px; font-size: 18px; line-height: 1.6; color: #444; max-width: 560px; opacity: {{ aboutBodyOpacity }}; transition: opacity 500ms ease; width: 561px; height: 69px">{{ aboutP1 }}</p>
 
-      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #444; max-width: 560px; opacity: {{ aboutBodyOpacity }}; transition: opacity 500ms ease; width: 557px; height: 101px">{{ aboutP2 }}</p><div style="display:flex;gap:0;flex-wrap:wrap;margin-top:44px;border-top:1px solid #111;">
+
+      <p class="ham-about-p" style="margin: 0; font-size: 18px; line-height: 1.6; color: #444; max-width: 560px; opacity: {{ aboutBodyOpacity }}; transition: opacity 500ms ease; width: 557px; height: 101px">{{ aboutP2 }}</p><div style="display:flex;gap:0;flex-wrap:wrap;margin-top:44px;border-top:1px solid #111;">
         <div class="stat-chip" style="padding:20px 28px 20px 0;border-right:1px solid #111;">
           <div style="font-family:'Archivo Black',sans-serif;font-size:36px;color:#C81E2E;">40+</div>
           <div style="font-size:14px;color:#666;margin-top:4px;">{{ stat1 }}</div>
@@ -87,9 +118,9 @@
 
     </div>
 
-    <div style="position:relative;padding-top:20px;min-height:460px;display:flex;flex-direction:column;align-items:center;">
+    <div class="ham-photo-col" style="position:relative;padding-top:20px;min-height:460px;display:flex;flex-direction:column;align-items:center;">
       <button onClick="{{ takePicture }}" style="background:#111;color:#fff;font-size:14px;font-weight:600;padding:12px 22px;border:none;border-radius:999px;cursor:pointer;">{{ takePictureLabel }}</button>
-      <div style="position:relative;width:340px;height:210px;background:#d8ceb8;border-radius:10px;box-shadow:0 20px 40px rgba(0,0,0,0.3);z-index:2;margin-top:28px;border:3px solid #8a7f5f;">
+      <div class="ham-polaroid-frame" style="position:relative;width:340px;height:210px;background:#d8ceb8;border-radius:10px;box-shadow:0 20px 40px rgba(0,0,0,0.3);z-index:2;margin-top:28px;border:3px solid #8a7f5f;">
         <div style="position:absolute;top:10px;left:16px;right:16px;height:40px;background:#3d3527;border-radius:4px;"></div>
         <div style="position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:230px;height:20px;background:#1a1a1a;border-radius:3px;"></div>
         <div style="position:absolute;top:58px;left:30px;width:128px;height:128px;border-radius:50%;background:#111;border:10px solid #5a4f38;display:flex;align-items:center;justify-content:center;">
@@ -99,7 +130,7 @@
         <div style="position:absolute;top:70px;right:26px;width:56px;height:18px;background:#3d3527;border-radius:3px;"></div>
         <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-family:'Archivo Black',sans-serif;font-size:13px;letter-spacing:0.14em;color:#5a4f38;">POLAROID</div>
       </div>
-      <div style="width:340px;height:520px;flex-shrink:0;overflow:hidden;position:relative;">
+      <div class="ham-polaroid-photo" style="width:340px;height:520px;flex-shrink:0;overflow:hidden;position:relative;">
         <div style="{{ polaroidStyle }}">
           <img src="uploads/_DSF6119-2.jpg" alt="Cennet Karaaslan headshot polaroid" style="width:100%;aspect-ratio:1/1.05;object-fit:cover;object-position:center 15%;display:block;">
           <div style="padding:18px 4px 4px;text-align:center;background:#fff;">
@@ -117,7 +148,7 @@
   <div style="max-width:1080px;margin:0 auto;">
     <span style="display:inline-block;background:#fff;color:#C81E2E;border:1px solid #C81E2E;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:8px 16px;border-radius:999px;">{{ servicesEyebrow }}</span>
     <h2 style="margin:16px 0 28px;font-family:'Archivo Black',sans-serif;font-size:clamp(30px,4.5vw,52px);line-height:1.05;color:#111;max-width:760px;">{{ servicesHeadline }}</h2>
-    <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #111;">
+    <div class="ham-services-grid" style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #111;">
       <sc-for list="{{ services }}" as="svc" hint-placeholder-count="11">
         <div style="{{ svc.style }}">
           <div style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#C81E2E;">{{ svc.num }}</div>
@@ -137,7 +168,7 @@
   </div>
 </div>
 
-<div id="ham-work-zoom" style="max-width:1080px;margin:0 auto;padding:24px 48px 40px;display:grid;grid-template-columns:repeat(3, 1fr);gap:40px;">
+<div id="ham-work-zoom" class="ham-work-grid" style="max-width:1080px;margin:0 auto;padding:24px 48px 40px;display:grid;grid-template-columns:repeat(3, 1fr);gap:40px;">
   <sc-for list="{{ workThumbs }}" as="img" hint-placeholder-count="12">
     <div style="{{ img.wrapStyle }}" style-hover="transform:scale(1.15);filter:brightness(1.25);z-index:10;box-shadow:0 20px 44px rgba(0,0,0,0.3);">
       <img src="{{ img.src }}" alt="{{ img.alt }}" style="{{ img.imgStyle }}">
@@ -168,7 +199,7 @@
 </div>
 
 <div id="contact" style="position:relative;z-index:2;background:#fff;padding:120px 48px 100px;overflow:hidden;border-top:1px solid #eee;">
-  <div style="position:relative;max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;">
+  <div class="ham-contact-grid" style="position:relative;max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;">
     <div>
       
       <span style="display:inline-block;background:#fff;color:#C81E2E;border:1px solid #C81E2E;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:8px 16px;border-radius:999px;">{{ contactEyebrow }}</span><h2 style="margin:24px 0 28px;font-family:'Archivo Black',sans-serif;font-size:clamp(32px,5vw,60px);line-height:1.03;color:#111;">{{ contactHeadline }}</h2>
@@ -185,7 +216,7 @@
         <a href="#" style="color:#111;font-size:16px;font-weight:600;padding-bottom:2px;border-bottom:1px solid #111;">LinkedIn</a>
       </div>
       
-    </div><form onsubmit="return false" style="display: flex; flex-direction: column; gap: 16px; width: 479px; height: 464px">
+    </div><form onsubmit="return false" class="ham-contact-form" style="display: flex; flex-direction: column; gap: 16px; width: 479px; height: 464px">
       <input type="text" placeholder="{{ nameP }}" style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:14px 16px;color:#111;font-size:15px;outline:none;font-family:'Inter',sans-serif;">
       <input type="email" placeholder="{{ emailP }}" style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:14px 16px;color:#111;font-size:15px;outline:none;font-family:'Inter',sans-serif;">
       <textarea rows="5" placeholder="{{ messageP }}" style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:14px 16px;color:#111;font-size:15px;outline:none;resize:vertical;font-family:'Inter',sans-serif;"></textarea>
