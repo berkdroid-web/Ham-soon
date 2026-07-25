@@ -1,0 +1,458 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Inter:wght@400;500;600;700&amp;family=JetBrains+Mono:wght@500;700&amp;display=swap" rel="stylesheet">
+<style>
+  html{scroll-behavior:smooth;}
+  body{margin:0;background:transparent;}
+  a{color:inherit;text-decoration:none;}
+  a:hover{opacity:0.7;}
+  .stat-chip{transition:transform 250ms ease;}
+  .stat-chip:hover{transform:rotate(0deg) scale(1.04);}
+  @keyframes blink{0%,49%{opacity:1;}50%,100%{opacity:0;}}
+  .blink-caret{animation:blink 1s step-end infinite;}
+  @keyframes polaroidDropA{0%{transform:translateY(0);}60%{transform:translateY(530px);}80%{transform:translateY(510px);}100%{transform:translateY(520px);}}
+  @keyframes polaroidDropB{0%{transform:translateY(0);}60%{transform:translateY(530px);}80%{transform:translateY(510px);}100%{transform:translateY(520px);}}
+</style>
+</helmet>
+
+
+
+<div style="position:fixed;inset:0;z-index:50;display:{{ introDisplay }};flex-direction:column;align-items:center;justify-content:center;gap:14px;background:#fff;opacity:{{ introBgOpacity }};transition:opacity 850ms cubic-bezier(0.7,0,0.9,0.4);pointer-events:none;">
+  <img src="assets/ham-logo.png" alt="HAM" style="width:min(60vw,560px);height:auto;transform:scale({{ introScale }});opacity:{{ introOpacity }};transition:transform 850ms cubic-bezier(0.7,0,0.9,0.4), opacity 850ms cubic-bezier(0.7,0,0.9,0.4);">
+  <span style="font-family:'Inter',sans-serif;font-size:18px;font-weight:600;letter-spacing:0.3em;text-transform:uppercase;color:#C81E2E;transform:scale({{ introScale }});opacity:{{ introOpacity }};transition:transform 850ms cubic-bezier(0.7,0,0.9,0.4), opacity 850ms cubic-bezier(0.7,0,0.9,0.4);">Creative Agency</span>
+</div>
+
+<div style="position:sticky;top:0;width:100%;height:100vh;min-height:720px;overflow:hidden;font-family:'Inter',sans-serif;background:transparent;z-index:1;">
+
+  <img src="uploads/sm-2323323.jpg" alt="Photographer and photo collage beam" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;clip-path:{{ beamClip }};transition:clip-path 2000ms cubic-bezier(0.16,1,0.3,1);filter:brightness(1.15) saturate(1.15);">
+
+  <img src="uploads/sm-2323323.jpg" alt="" style="position:absolute;inset:0;width:100%;height:100%;object-fit:cover;object-position:center 30%;filter:brightness(0.97);-webkit-mask-image:linear-gradient(90deg, black 0%, black 24%, transparent 40%);mask-image:linear-gradient(90deg, black 0%, black 24%, transparent 40%);">
+
+  <header style="position:relative;z-index:2;display:flex;align-items:center;justify-content:space-between;padding:32px 48px;">
+    <nav style="display:flex;align-items:center;gap:40px;">
+      <div style="display:flex;gap:6px;border:1px solid rgba(255,255,255,0.35);border-radius:999px;padding:4px;">
+        <button onClick="{{ setEn }}" style="border:none;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:600;cursor:pointer;background:{{ enBg }};color:{{ enColor }};">EN</button>
+        <button onClick="{{ setTr }}" style="border:none;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:600;cursor:pointer;background:{{ trBg }};color:{{ trColor }};">TR</button>
+      </div><a href="#work" style="color:#fff;font-size:16px;font-weight:600;letter-spacing:0.02em;">{{ work }}</a>
+      <a href="#about" style="color:#fff;font-size:16px;font-weight:600;letter-spacing:0.02em;">{{ about }}</a>
+      <a href="#contact" style="color:#fff;font-size:16px;font-weight:600;letter-spacing:0.02em;">{{ contact }}</a>
+      
+    </nav><div style="background:#fff;border-radius:12px;padding:10px 18px;display:flex;align-items:center;"><img src="assets/ham-logo.png" alt="HAM" style="height: 87px; width: 131px"></div>
+  </header>
+
+  <div style="position: absolute; z-index: 2; left: -21px; display: flex; flex-direction: column; justify-content: flex-end; padding: 0 48px 64px; max-width: 920px; gap: 28px; opacity: {{ fadeOpacity }}; transform: translateY({{ fadeTranslate }}px); top: 489px; width: 836px; height: 192px">
+    <div style="width: 604px; height: 60px">
+      <a href="#work" style="display:inline-flex;align-items:center;gap:10px;background:#C81E2E;color:#fff;font-size:16px;font-weight:600;padding:16px 30px;border-radius:999px;box-shadow:0 8px 24px rgba(200,30,46,0.4);">
+        {{ cta }}
+        <span style="font-size:18px;">→</span>
+      </a>
+    </div><h1 style="margin: 0; font-family: 'Archivo Black',sans-serif; font-size: clamp(40px,6.5vw,88px); line-height: 0.98; color: #fff; text-shadow: 0 4px 24px rgba(0,0,0,0.5); width: 1060px; height: 92px">
+      {{ headline }}
+    </h1>
+  </div>
+
+</div>
+
+<div id="about" style="position:relative;z-index:2;background:#fff;padding:120px 48px 100px;">
+  <div style="max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1.3fr 0.7fr;gap:56px;align-items:start;">
+    <div>
+      <span style="display:inline-block;background:#fff;color:#C81E2E;border:1px solid #C81E2E;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:8px 16px;border-radius:999px;">{{ aboutEyebrow }}</span>
+      <h2 style="margin:24px 0 28px;font-family:'Archivo Black',sans-serif;font-size:clamp(34px,5.5vw,64px);line-height:1.02;color:#111;min-height:1.1em;white-space:pre-line;">{{ aboutTyped }}<span class="blink-caret" style="opacity:{{ caretVisible }};">|</span></h2>
+      <p style="margin: 0 0 18px; font-size: 18px; line-height: 1.6; color: #444; max-width: 560px; opacity: {{ aboutBodyOpacity }}; transition: opacity 500ms ease; width: 561px; height: 69px">{{ aboutP1 }}</p>
+      
+
+      <p style="margin: 0; font-size: 18px; line-height: 1.6; color: #444; max-width: 560px; opacity: {{ aboutBodyOpacity }}; transition: opacity 500ms ease; width: 557px; height: 101px">{{ aboutP2 }}</p><div style="display:flex;gap:0;flex-wrap:wrap;margin-top:44px;border-top:1px solid #111;">
+        <div class="stat-chip" style="padding:20px 28px 20px 0;border-right:1px solid #111;">
+          <div style="font-family:'Archivo Black',sans-serif;font-size:36px;color:#C81E2E;">40+</div>
+          <div style="font-size:14px;color:#666;margin-top:4px;">{{ stat1 }}</div>
+        </div>
+        <div class="stat-chip" style="padding:20px 28px;border-right:1px solid #111;">
+          <div style="font-family:'Archivo Black',sans-serif;font-size:36px;color:#111;">12</div>
+          <div style="font-size:14px;color:#666;margin-top:4px;">{{ stat2 }}</div>
+        </div><div class="stat-chip" style="padding:20px 0 20px 28px;">
+          <div style="font-family:'Archivo Black',sans-serif;font-size:36px;color:#111;">2</div>
+          <div style="font-size:14px;color:#666;margin-top:4px;">Artist</div>
+        </div>
+      </div>
+
+    </div>
+
+    <div style="position:relative;padding-top:20px;min-height:460px;display:flex;flex-direction:column;align-items:center;">
+      <button onClick="{{ takePicture }}" style="background:#111;color:#fff;font-size:14px;font-weight:600;padding:12px 22px;border:none;border-radius:999px;cursor:pointer;">{{ takePictureLabel }}</button>
+      <div style="position:relative;width:340px;height:210px;background:#d8ceb8;border-radius:10px;box-shadow:0 20px 40px rgba(0,0,0,0.3);z-index:2;margin-top:28px;border:3px solid #8a7f5f;">
+        <div style="position:absolute;top:10px;left:16px;right:16px;height:40px;background:#3d3527;border-radius:4px;"></div>
+        <div style="position:absolute;bottom:-10px;left:50%;transform:translateX(-50%);width:230px;height:20px;background:#1a1a1a;border-radius:3px;"></div>
+        <div style="position:absolute;top:58px;left:30px;width:128px;height:128px;border-radius:50%;background:#111;border:10px solid #5a4f38;display:flex;align-items:center;justify-content:center;">
+          <div style="width:70px;height:70px;border-radius:50%;background:#274b6b;border:4px solid #6b5f42;"></div>
+        </div>
+        <div style="position:absolute;top:18px;right:30px;width:22px;height:22px;border-radius:50%;background:#e8dfc8;border:2px solid #3d3527;"></div>
+        <div style="position:absolute;top:70px;right:26px;width:56px;height:18px;background:#3d3527;border-radius:3px;"></div>
+        <div style="position:absolute;top:-16px;left:50%;transform:translateX(-50%);font-family:'Archivo Black',sans-serif;font-size:13px;letter-spacing:0.14em;color:#5a4f38;">POLAROID</div>
+      </div>
+      <div style="width:340px;height:520px;flex-shrink:0;overflow:hidden;position:relative;">
+        <div style="{{ polaroidStyle }}">
+          <img src="uploads/_DSF6119-2.jpg" alt="Cennet Karaaslan headshot polaroid" style="width:100%;aspect-ratio:1/1.05;object-fit:cover;object-position:center 15%;display:block;">
+          <div style="padding:18px 4px 4px;text-align:center;background:#fff;">
+            <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.08em;color:#999;">CO-FOUNDER</div>
+            <div style="font-family:'Archivo Black',sans-serif;font-size:22px;color:#111;margin-top:4px;">Cennet Karaaslan</div>
+            <div style="font-family:'JetBrains Mono',monospace;font-size:13px;letter-spacing:0.05em;color:#777;margin-top:4px;">Designer</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<div id="services" style="position:relative;z-index:2;background:#fff;padding:64px 48px;border-top:1px solid #eee;" data-section="services">
+  <div style="max-width:1080px;margin:0 auto;">
+    <span style="display:inline-block;background:#fff;color:#C81E2E;border:1px solid #C81E2E;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:8px 16px;border-radius:999px;">{{ servicesEyebrow }}</span>
+    <h2 style="margin:16px 0 28px;font-family:'Archivo Black',sans-serif;font-size:clamp(30px,4.5vw,52px);line-height:1.05;color:#111;max-width:760px;">{{ servicesHeadline }}</h2>
+    <div style="display:grid;grid-template-columns:repeat(3,1fr);border-top:1px solid #111;">
+      <sc-for list="{{ services }}" as="svc" hint-placeholder-count="11">
+        <div style="{{ svc.style }}">
+          <div style="font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;color:#C81E2E;">{{ svc.num }}</div>
+          <div style="font-family:'Archivo Black',sans-serif;font-size:22px;color:#111;margin-top:10px;">{{ svc.title }}</div>
+          <div style="font-size:15px;color:#666;margin-top:10px;line-height:1.4;">{{ svc.desc }}</div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+<div id="work" style="position:relative;z-index:2;background:#fff;padding:120px 48px 80px;">
+  <div style="max-width:1080px;margin:0 auto 60px;text-align:center;">
+    <span style="display:inline-block;background:#fff;color:#111;border:1px solid #111;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:8px 16px;border-radius:999px;">{{ workEyebrow }}</span>
+    <h2 style="margin:24px 0 16px;font-family:'Archivo Black',sans-serif;font-size:clamp(34px,5.5vw,64px);line-height:1.02;color:#111;">{{ workHeadline }}</h2>
+    <p style="margin:0 auto;max-width:560px;font-size:18px;line-height:1.6;color:#666;">{{ workSub }}</p>
+  </div>
+</div>
+
+<div id="ham-work-zoom" style="max-width:1080px;margin:0 auto;padding:24px 48px 40px;display:grid;grid-template-columns:repeat(3, 1fr);gap:40px;">
+  <sc-for list="{{ workThumbs }}" as="img" hint-placeholder-count="12">
+    <div style="{{ img.wrapStyle }}" style-hover="transform:scale(1.15);filter:brightness(1.25);z-index:10;box-shadow:0 20px 44px rgba(0,0,0,0.3);">
+      <img src="{{ img.src }}" alt="{{ img.alt }}" style="{{ img.imgStyle }}">
+    </div>
+  </sc-for>
+</div>
+
+
+
+<div id="faq" style="position:relative;z-index:2;background:#fff;padding:100px 48px;border-top:1px solid #eee;">
+  <div style="max-width:800px;margin:0 auto;">
+    <span style="display:inline-block;background:#fff;color:#C81E2E;border:1px solid #C81E2E;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:8px 16px;border-radius:999px;">{{ faqEyebrow }}</span>
+    <h2 style="margin:24px 0 40px;font-family:'Archivo Black',sans-serif;font-size:clamp(32px,5vw,52px);line-height:1.05;color:#111;">{{ faqHeadline }}</h2>
+    <div style="border-top:1px solid #111;">
+      <sc-for list="{{ faqItems }}" as="item" hint-placeholder-count="5">
+        <div style="border-bottom:1px solid #ddd;">
+          <div onClick="{{ item.toggle }}" style="display:flex;align-items:center;justify-content:space-between;gap:24px;padding:24px 0;cursor:pointer;">
+            <div style="font-family:'Archivo Black',sans-serif;font-size:19px;color:#111;">{{ item.q }}</div>
+            <div style="{{ item.iconStyle }}">+</div>
+          </div>
+          <div style="{{ item.bodyStyle }}">
+            <p style="margin:0 0 24px;font-size:16px;line-height:1.6;color:#666;max-width:640px;">{{ item.a }}</p>
+          </div>
+        </div>
+      </sc-for>
+    </div>
+  </div>
+</div>
+
+<div id="contact" style="position:relative;z-index:2;background:#fff;padding:120px 48px 100px;overflow:hidden;border-top:1px solid #eee;">
+  <div style="position:relative;max-width:1080px;margin:0 auto;display:grid;grid-template-columns:1fr 1fr;gap:64px;">
+    <div>
+      
+      <span style="display:inline-block;background:#fff;color:#C81E2E;border:1px solid #C81E2E;font-family:'JetBrains Mono',monospace;font-size:13px;font-weight:700;letter-spacing:0.08em;text-transform:uppercase;padding:8px 16px;border-radius:999px;">{{ contactEyebrow }}</span><h2 style="margin:24px 0 28px;font-family:'Archivo Black',sans-serif;font-size:clamp(32px,5vw,60px);line-height:1.03;color:#111;">{{ contactHeadline }}</h2>
+      <div style="display:flex;flex-direction:column;gap:20px;margin-top:32px;">
+        <a href="mailto:hamhamajans@gmail.com" style="color:#111;font-size:19px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#C81E2E;letter-spacing:0.05em;">EMAIL</span>hamhamajans@gmail.com
+        </a>
+        <a href="tel:+905340806085" style="color:#111;font-size:19px;font-weight:600;display:flex;align-items:center;gap:10px;">
+          <span style="font-family:'JetBrains Mono',monospace;font-size:12px;font-weight:700;color:#C81E2E;letter-spacing:0.05em;">PHONE</span>+90 534 080 60 85 — Berk İşeri
+        </a>
+      </div>
+      <div style="margin-top:32px;display:flex;gap:24px;">
+        <a href="https://www.instagram.com/hamhamajans/" style="color:#111;font-size:16px;font-weight:600;padding-bottom:2px;border-bottom:1px solid #111;">Instagram</a>
+        <a href="#" style="color:#111;font-size:16px;font-weight:600;padding-bottom:2px;border-bottom:1px solid #111;">LinkedIn</a>
+      </div>
+      
+    </div><form onsubmit="return false" style="display: flex; flex-direction: column; gap: 16px; width: 479px; height: 464px">
+      <input type="text" placeholder="{{ nameP }}" style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:14px 16px;color:#111;font-size:15px;outline:none;font-family:'Inter',sans-serif;">
+      <input type="email" placeholder="{{ emailP }}" style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:14px 16px;color:#111;font-size:15px;outline:none;font-family:'Inter',sans-serif;">
+      <textarea rows="5" placeholder="{{ messageP }}" style="background:#fff;border:1px solid #ccc;border-radius:8px;padding:14px 16px;color:#111;font-size:15px;outline:none;resize:vertical;font-family:'Inter',sans-serif;"></textarea>
+      <button type="submit" style="align-self:flex-start;background:#C81E2E;color:#fff;font-size:16px;font-weight:600;padding:14px 28px;border:none;border-radius:999px;cursor:pointer;box-shadow:0 8px 24px rgba(200,30,46,0.25);">{{ send }}</button>
+    </form>
+
+    
+  </div>
+
+  <div style="position:relative;max-width:1080px;margin:80px auto 0;padding-top:24px;border-top:1px solid #eee;display:flex;justify-content:space-between;font-size:13px;color:#999;font-family:'JetBrains Mono',monospace;">
+    <span>© 2026 HAM AGENCY</span>
+    <span>{{ location }}</span>
+  </div>
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+
+const T = {
+  en: {
+    work: 'Work', about: 'About', contact: 'Contact',
+    headline: 'The most artistic way to approach advertising.', cta: 'See our work',
+    aboutEyebrow: 'ABOUT US',
+    aboutHeadline: 'We make the ordinary brief impossible to scroll past.',
+    aboutP1: 'HAM is a small creative agency working across food, drink, and lifestyle brands. We shoot, style, and design campaigns end to end — no hand-offs, no watered-down ideas by the time they reach a feed or a menu board.',
+    aboutP2: "Every project starts the same way: figure out what's actually interesting about the product, then build the whole campaign around that one thing.",
+    stat1: 'Campaigns shot', stat2: 'Brands worked with', stat3: 'People, one camera',
+    takePictureLabel: 'Take a picture',
+    servicesEyebrow: 'SERVICES', servicesHeadline: 'Everything a brand needs, under one roof.',
+    services: [
+      {num:'01',title:'Photography',desc:'Every plate lit to make people order twice.'},
+      {num:'02',title:'Videography',desc:"Captures the motion a photo can't carry."},
+      {num:'03',title:'Design',desc:'Identity systems that make a brand visible.'},
+      {num:'04',title:'Web Design',desc:'Sites that load fast and taste better than they look.'},
+      {num:'05',title:'NFC & QR Code',desc:'A menu guests actually want to open.'},
+      {num:'06',title:'Drone Footage',desc:'The overhead view your space has earned.'},
+      {num:'07',title:'Social Media Management',desc:'Not just content — a consistent presence.'},
+      {num:'08',title:'Ad Management',desc:'Budget that reaches the right people at the right time.'},
+      {num:'09',title:'Marketing Strategy',desc:"Behind every feed, a plan."},
+      {num:'10',title:'Menu & Logo Design',desc:'Identity systems that survive print.'},
+      {num:'11',title:'Using AI Systems',desc:'Smart workflows that save time.'}
+    ],
+    workEyebrow: 'OUR WORK', workHeadline: 'Zoom into the details.',
+    workSub: 'Every shoot is built frame by frame — scroll to see the collage come together.',
+    portfolioCta: 'See full portfolio',
+    faqEyebrow: 'FAQ', faqHeadline: 'Questions, answered.',
+    faq: [
+      {q:'Which cities do you shoot in?', a:'We’re based in Istanbul and travel across Turkey for clients — coastal locations like Bodrum included.'},
+      {q:'Do you only work with restaurants?', a:'Mostly food, drink and lifestyle brands, but we take on hospitality and product work too.'},
+      {q:'How long does a typical project take?', a:'A single shoot day usually turns around in a week; full campaigns run 2–4 weeks depending on scope.'},
+      {q:'Do you do photography and web design together?', a:'Yes — many clients start with a shoot and end up with the whole site built around it.'},
+      {q:'Can you design our menu or logo too?', a:'Yes, brand and menu design are part of what we offer alongside photo and video.'}
+    ],
+    contactEyebrow: 'GET IN TOUCH',
+    contactHeadline: "Got a brief? Let's make it worth looking at.",
+    location: 'Istanbul · Remote-friendly',
+    nameP: 'Your name', emailP: 'Email', messageP: 'Tell us about the project', send: 'Send message'
+  },
+  tr: {
+    work: 'İşler', about: 'Hakkımızda', contact: 'İletişim',
+    headline: 'Reklama sanatsal yaklaşmanın en yaratıcı yolu.', cta: 'İşlerimize göz atın',
+    aboutEyebrow: 'HAKKIMIZDA',
+    aboutHeadline: 'Fikri biz buluruz,\nçekimi biz yaparız,\ntasarımı biz bitiririz.',
+    aboutP1: 'HAM, fotoğraf ve videonun her alanında kampanya üreten bir yaratıcı ajans.  Kampanyaları uçtan uca biz çekiyor, biz stilize ediyor, biz tasarlıyoruz.',
+    aboutP2: 'Çekimden, Reklam Yönetimine,  Sosyal Medya Yöneticiliğinden, sıfırdan Web Tasarımına, Videodan, QR menüye kadar markanın ihtiyaç duyduğu her şey tek bir ekipten çıkar.',
+    stat1: 'Çekilen kampanya', stat2: 'Birlikte çalışılan marka', stat3: 'Kişi',
+    takePictureLabel: 'Bir Fotoğraf Çek',
+    servicesEyebrow: 'HİZMETLER', servicesHeadline: 'Bir markanın ihtiyaç duyduğu her şey, tek çatı altında.',
+    services: [
+      {num:'01',title:'Fotoğraf',desc:'Her kare, ürünü olduğundan daha iştah açıcı gösterir.'},
+      {num:'02',title:'Videografi',desc:"Bir fotoğrafın taşıyamadığı hareketi yakalar."},
+      {num:'03',title:'Tasarım',desc:'Markanın kimliğini görünür kılan sistemler.'},
+      {num:'04',title:'Web Tasarım',desc:'Hızlı açılan, göründüğünden daha lezzetli siteler.'},
+      {num:'05',title:'NFC & QR Kod',desc:'Misafirin dokunduğu anda açılan deneyim.'},
+      {num:'06',title:'Drone Çekimleri',desc:'Mekânın yukarıdan hak ettiği görünüm.'},
+      {num:'07',title:'Sosyal Medya Yönetimi',desc:'Sadece içerik değil, tutarlı bir varlık.'},
+      {num:'08',title:'Reklam Yönetimi',desc:'Doğru kitleye, doğru zamanda ulaşan bütçe.'},
+      {num:'09',title:'Pazarlama Önerileri',desc:"Feed'in arkasında sadece bir plan değil."},
+      {num:'10',title:'Menü ve Logo Tasarımı',desc:'Baskıdan sağ çıkan kimlik sistemleri.'},
+      {num:'11',title:'Yapay Zeka Sistemlerini Kullanma',desc:'Zamandan tasarruf eden akıllı iş akışları.'}
+    ],
+    workEyebrow: 'İŞLERİMİZ', workHeadline: 'Detaylara yaklaşın.',
+    workSub: 'Her çekim kare kare kurulur — kolajın bir araya gelişini görmek için kaydırın.',
+    portfolioCta: 'Tüm portföyü gör',
+    faqEyebrow: 'SSS', faqHeadline: 'Sorular, cevaplandı.',
+    faq: [
+      {q:'Hangi şehirlerde çekim yapıyorsunuz?', a:'Merkezimiz İstanbul, Türkiye çapında müşteriler için seyahat ediyoruz — Bodrum gibi kıyı lokasyonları dahil.'},
+      {q:'Sadece restoranlarla mı çalışıyorsunuz?', a:'Hayır. HAM, markalar ve bireysel müşteriler için fotoğraf ve video prodüksiyonu gerçekleştirir. Restoran, otel, ürün, moda, etkinlik, drone ve özel çekim projelerinde yaratıcı içerikler üretiyoruz. Aklınızdaki proje farklıysa, bize ulaşın; birlikte en uygun çözümü planlayalım.'},
+      {q:'Bir proje genelde ne kadar sürer?', a:'Tek bir çekim günü genelde bir hafta içinde teslim edilir; kapsamına göre tam kampanyalar 2–4 hafta sürer.'},
+      {q:'Fotoğraf ve web tasarımını birlikte mi yapıyorsunuz?', a:'Evet — bunun yanında diğer hizmetlerimize de detaylı bir biçimde bakabilirsiniz.'},
+      {q:'Menümüzü veya logomuzu da tasarlayabilir misiniz?', a:'Evet, marka ve menü tasarımı da fotoğraf ve video yanında sunduğumuz hizmetler arasında.'}
+    ],
+    contactEyebrow: 'İLETİŞİME GEÇİN',
+    contactHeadline: 'HAM ile tanışın, markanızı birlikte bir adım ileri taşıyalım.',
+    location: 'İstanbul · Uzaktan çalışmaya uygun',
+    nameP: 'Adınız', emailP: 'E-posta', messageP: 'Projeden bahsedin', send: 'Mesaj gönder'
+  }
+};
+
+const WORK_ITEMS = [
+  { src: 'uploads/sm-BODRUM.jpg', alt: 'Bodrum' },
+  { src: 'uploads/sm-break free drink bomonti.jpg', alt: 'Break Free — Drink Bomonti' },
+  { src: 'uploads/sm-verde fresco.jpg', alt: 'Verde Fresco' },
+  { src: 'uploads/sm-pizza close up.jpg', alt: 'Pizza' },
+  { src: 'uploads/sm-BEST FRESH DRAFT BEER.jpg', alt: 'Best Fresh Draft Beer', pos: 'center 80%' },
+  { src: 'uploads/sm-midye sushi.jpg', alt: 'Midye Sushi' },
+  { src: 'uploads/sm-levrek fine dine.jpg', alt: 'Levrek — Fine Dine' },
+  { src: 'uploads/sm-RUBY PLEASURE.jpg', alt: 'Ruby Pleasure' },
+  { src: 'uploads/sm-pizza.jpg', alt: 'Pizza wide' },
+  { src: 'uploads/sm-pel-coffee.jpg', alt: 'Pél Coffee & Co', pos: 'center 60%' },
+  { src: 'uploads/sm-patika-coffee.jpg', alt: 'Patika Coffee & Roastery', pos: 'center 35%' },
+  { src: 'uploads/sm-homo-ludens.jpg', alt: 'Homo Ludens', pos: 'center 30%' }
+];
+
+class Component extends DCLogic {
+  state = { revealed: false, scrollY: 0, introPhase: 'hold', lang: 'tr', servicesRevealed: false, typedLen: 0, aboutStarted: false, ejected: false, ejectCount: 0, flashOn: false };
+  workRef = null;
+
+  componentDidMount() {
+    requestAnimationFrame(() => {
+      requestAnimationFrame(() => this.setState({ revealed: true }));
+    });
+    setTimeout(() => this.setState({ revealed: true }), 500);
+    this._ticking = false;
+    this._onScroll = () => {
+      if (this._ticking) return;
+      this._ticking = true;
+      requestAnimationFrame(() => {
+        this._ticking = false;
+        const y = window.scrollY;
+        if (Math.abs(y - this.state.scrollY) < 2) return;
+        this.setState({ scrollY: y });
+      });
+    };
+    window.addEventListener('scroll', this._onScroll, { passive: true });
+
+    setTimeout(() => this.setState({ introPhase: 'zoom' }), 700);
+    setTimeout(() => this.setState({ introPhase: 'done' }), 1550);
+
+    this._observer = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && !this.state.aboutStarted) {
+          this.setState({ aboutStarted: true });
+          this.startTyping();
+        }
+      });
+    }, { threshold: 0.4 });
+    const aboutEl = document.getElementById('about');
+    if (aboutEl) this._observer.observe(aboutEl);
+
+    this._servicesObserver = new IntersectionObserver((entries) => {
+      entries.forEach((e) => {
+        if (e.isIntersecting && !this.state.servicesRevealed) this.setState({ servicesRevealed: true });
+      });
+    }, { threshold: 0.15 });
+    const servicesEl = document.getElementById('services');
+    if (servicesEl) this._servicesObserver.observe(servicesEl);
+  }
+
+  toggleFaq(i) {
+    this.setState((s) => ({ openFaq: s.openFaq === i ? -1 : i }));
+  }
+
+  startTyping() {
+    clearInterval(this._typeTimer);
+    this.setState({ typedLen: 0 });
+    const full = T[this.state.lang].aboutHeadline;
+    this._typeTimer = setInterval(() => {
+      this.setState((s) => {
+        const next = s.typedLen + 1;
+        if (next >= full.length) clearInterval(this._typeTimer);
+        return { typedLen: next };
+      });
+    }, 35);
+  }
+
+  componentWillUnmount() {
+    window.removeEventListener('scroll', this._onScroll);
+    if (this._observer) this._observer.disconnect();
+    clearInterval(this._typeTimer);
+    clearTimeout(this._ejectTimer);
+    clearTimeout(this._flashOffTimer);
+  }
+
+  setLang(lang) {
+    localStorage.setItem('ham_lang', lang);
+    this.setState({ lang });
+    if (this.state.aboutStarted) this.startTyping();
+  }
+
+  takePicture() {
+    clearTimeout(this._ejectTimer);
+    clearTimeout(this._flashOffTimer);
+    this.setState((s) => ({ ejected: false, flashOn: true, ejectCount: s.ejectCount + 1 }));
+    this._ejectTimer = setTimeout(() => this.setState({ ejected: true }), 100);
+    this._flashOffTimer = setTimeout(() => this.setState({ flashOn: false }), 1000);
+  }
+
+
+
+  renderVals() {
+    const beamClip = this.state.revealed
+      ? 'polygon(0% 0%, 100% 0%, 100% 0%, 100% 0%, 100% 100%, 0% 100%)'
+      : 'polygon(0% 0%, 50% 0%, 32% 62%, 100% 46%, 100% 100%, 0% 100%)';
+    const y = this.state.scrollY;
+    const fadeOpacity = Math.max(0, 1 - y / 260);
+    const fadeTranslate = -y * 0.3;
+    const t = T[this.state.lang];
+    const aboutTyped = t.aboutHeadline.slice(0, this.state.typedLen);
+    const typingDone = this.state.typedLen >= t.aboutHeadline.length;
+    const caretVisible = typingDone ? 0 : 1;
+    const aboutBodyOpacity = typingDone ? 1 : 0;
+    const dropAnim = this.state.ejectCount % 2 === 0 ? 'polaroidDropA' : 'polaroidDropB';
+    const polaroidStyle = `position:absolute;top:-520px;left:0;width:340px;box-sizing:border-box;background:#fff;padding:18px 18px 20px;box-shadow:0 18px 40px rgba(0,0,0,0.3);border-radius:2px;z-index:1;transform:translateY(0);${this.state.ejected ? `animation:${dropAnim} 1000ms cubic-bezier(0.34,1.4,0.4,1) forwards;` : ''}`;
+    const flashOpacity = this.state.flashOn ? 1 : 0;
+    const flashTransition = this.state.flashOn ? 'none' : 'opacity 700ms ease';
+    const introPhase = this.state.introPhase;
+    const introScale = introPhase === 'zoom' ? 9 : 1;
+    const introOpacity = introPhase === 'zoom' ? 0 : 1;
+    const introBgOpacity = introPhase === 'zoom' ? 0 : 1;
+    const introDisplay = introPhase === 'done' ? 'none' : 'flex';
+
+    const workThumbs = WORK_ITEMS.map((item) => ({
+      src: item.src, alt: item.alt,
+      wrapStyle: 'position:relative;cursor:pointer;aspect-ratio:1/1;overflow:hidden;border-radius:2px;transform:scale(1);filter:brightness(1);z-index:1;box-shadow:0 0 0 rgba(0,0,0,0);transition:transform 400ms cubic-bezier(0.2,0.8,0.2,1), filter 400ms ease, box-shadow 400ms ease;',
+      imgStyle: `width:100%;height:100%;object-fit:cover;object-position:${item.pos || 'center'};display:block;`
+    }));
+
+    return {
+      introDisplay, introScale, introOpacity, introBgOpacity,
+      beamClip, fadeOpacity, fadeTranslate,
+      aboutTyped, caretVisible, aboutBodyOpacity, polaroidStyle, flashOpacity, flashTransition,
+      takePicture: () => this.takePicture(),
+      takePictureLabel: t.takePictureLabel,
+      work: t.work, about: t.about, contact: t.contact, headline: t.headline, cta: t.cta,
+      aboutEyebrow: t.aboutEyebrow, aboutHeadline: t.aboutHeadline, aboutP1: t.aboutP1, aboutP2: t.aboutP2,
+      stat1: t.stat1, stat2: t.stat2, stat3: t.stat3,
+      services: t.services.map((s, i) => ({
+        ...s,
+        style: `padding:20px 24px 20px 0;border-bottom:1px solid #ddd;opacity:${this.state.servicesRevealed ? 1 : 0};transform:translateY(${this.state.servicesRevealed ? 0 : 22}px);filter:blur(${this.state.servicesRevealed ? 0 : 4}px);transition:opacity 600ms cubic-bezier(0.22,1,0.36,1) ${i * 120}ms, transform 600ms cubic-bezier(0.22,1,0.36,1) ${i * 120}ms, filter 600ms cubic-bezier(0.22,1,0.36,1) ${i * 120}ms;`
+      })),
+      servicesEyebrow: t.servicesEyebrow, servicesHeadline: t.servicesHeadline,
+      workEyebrow: t.workEyebrow, workHeadline: t.workHeadline, workSub: t.workSub, portfolioCta: t.portfolioCta,
+      faqEyebrow: t.faqEyebrow, faqHeadline: t.faqHeadline,
+      faqItems: t.faq.map((f, i) => {
+        const open = this.state.openFaq === i;
+        return {
+          q: f.q, a: f.a,
+          toggle: () => this.toggleFaq(i),
+          iconStyle: `flex-shrink:0;width:28px;height:28px;border-radius:50%;border:1px solid #111;display:flex;align-items:center;justify-content:center;font-size:16px;color:#111;transition:transform 300ms ease;transform:rotate(${open ? 45 : 0}deg);`,
+          bodyStyle: `overflow:hidden;max-height:${open ? '240px' : '0px'};transition:max-height 350ms ease;`
+        };
+      }),
+      contactEyebrow: t.contactEyebrow, contactHeadline: t.contactHeadline, location: t.location,
+      nameP: t.nameP, emailP: t.emailP, messageP: t.messageP, send: t.send,
+      workThumbs,
+      lang: this.state.lang,
+      enBg: this.state.lang === 'en' ? '#fff' : 'transparent',
+      enColor: this.state.lang === 'en' ? '#111' : '#fff',
+      trBg: this.state.lang === 'tr' ? '#fff' : 'transparent',
+      trColor: this.state.lang === 'tr' ? '#111' : '#fff',
+      setEn: () => this.setLang('en'),
+      setTr: () => this.setLang('tr')
+    };
+  }
+}
+
+</script>
+</body>
+</html>

@@ -1,0 +1,103 @@
+<!DOCTYPE html>
+<html>
+<head>
+<meta charset="utf-8">
+<meta name="viewport" content="width=device-width, initial-scale=1">
+<script src="./support.js"></script>
+</head>
+<body>
+<x-dc>
+<helmet>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Archivo+Black&amp;family=Inter:wght@400;500;600&amp;display=swap" rel="stylesheet">
+<style>
+  body{margin:0;background:#111;}
+  a{color:inherit;text-decoration:none;}
+  a:hover{opacity:0.75;}
+  input, textarea{font-family:'Inter',sans-serif;}
+  input::placeholder, textarea::placeholder{color:rgba(255,255,255,0.4);}
+</style>
+</helmet>
+
+<div style="min-height:100vh;background:#111;font-family:'Inter',sans-serif;color:#fff;">
+
+  <header style="display:flex;align-items:center;justify-content:space-between;padding:28px 48px;">
+    <a href="HAM Hero.dc.html"><img src="assets/ham-logo.png" alt="HAM" style="height:56px;width:auto;"></a>
+    <nav style="display:flex;align-items:center;gap:40px;">
+      <a href="Work.dc.html" style="color:rgba(255,255,255,0.7);font-size:16px;font-weight:600;letter-spacing:0.02em;">{{ work }}</a>
+      <a href="About.dc.html" style="color:rgba(255,255,255,0.7);font-size:16px;font-weight:600;letter-spacing:0.02em;">{{ about }}</a>
+      <a href="Contact.dc.html" style="color:#fff;font-size:16px;font-weight:600;letter-spacing:0.02em;border-bottom:2px solid #C81E2E;padding-bottom:4px;">{{ contact }}</a>
+      <div style="display:flex;gap:6px;border:1px solid rgba(255,255,255,0.25);border-radius:999px;padding:4px;">
+        <button onClick="{{ setEn }}" style="border:none;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:600;cursor:pointer;background:{{ enBg }};color:{{ enColor }};">EN</button>
+        <button onClick="{{ setTr }}" style="border:none;border-radius:999px;padding:4px 10px;font-size:13px;font-weight:600;cursor:pointer;background:{{ trBg }};color:{{ trColor }};">TR</button>
+      </div>
+    </nav>
+  </header>
+
+  <div style="max-width:1080px;padding:40px 48px 100px;display:grid;grid-template-columns:1fr 1fr;gap:64px;">
+
+    <div>
+      <h1 style="margin:0 0 20px;font-family:'Archivo Black',sans-serif;font-size:clamp(32px,5vw,60px);line-height:1.02;">{{ headline }}</h1>
+      <div style="margin-top:40px;display:flex;flex-direction:column;gap:16px;font-size:17px;">
+        <a href="mailto:hello@hamagency.com" style="color:#fff;">hello@hamagency.com</a>
+        <a href="tel:+10000000000" style="color:#fff;">+1 (000) 000-0000</a>
+        <span style="color:rgba(255,255,255,0.6);">{{ location }}</span>
+      </div>
+      <div style="margin-top:32px;display:flex;gap:20px;font-size:15px;color:rgba(255,255,255,0.6);">
+        <a href="#">Instagram</a>
+        <a href="#">LinkedIn</a>
+      </div>
+    </div>
+
+    <form onsubmit="return false" style="display:flex;flex-direction:column;gap:16px;">
+      <input type="text" placeholder="{{ nameP }}" style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:14px 16px;color:#fff;font-size:15px;outline:none;">
+      <input type="email" placeholder="{{ emailP }}" style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:14px 16px;color:#fff;font-size:15px;outline:none;">
+      <textarea rows="5" placeholder="{{ messageP }}" style="background:#1a1a1a;border:1px solid rgba(255,255,255,0.15);border-radius:8px;padding:14px 16px;color:#fff;font-size:15px;outline:none;resize:vertical;"></textarea>
+      <button type="submit" style="align-self:flex-start;background:#C81E2E;color:#fff;font-size:16px;font-weight:600;padding:14px 28px;border:none;border-radius:999px;cursor:pointer;box-shadow:0 8px 24px rgba(200,30,46,0.4);">{{ send }}</button>
+    </form>
+
+  </div>
+
+</div>
+
+</x-dc>
+<script type="text/x-dc" data-dc-script>
+const T = {
+  en: {
+    work: 'Work', about: 'About', contact: 'Contact',
+    headline: "Got a brief? Let's make it worth looking at.",
+    location: 'Istanbul · Remote-friendly',
+    nameP: 'Your name', emailP: 'Email', messageP: 'Tell us about the project', send: 'Send message'
+  },
+  tr: {
+    work: 'İşler', about: 'Hakkımızda', contact: 'İletişim',
+    headline: 'Bir briefin mi var? Bakılası hale getirelim.',
+    location: 'İstanbul · Uzaktan çalışmaya uygun',
+    nameP: 'Adınız', emailP: 'E-posta', messageP: 'Projeden bahsedin', send: 'Mesaj gönder'
+  }
+};
+
+class Component extends DCLogic {
+  state = { lang: (typeof localStorage !== 'undefined' && localStorage.getItem('ham_lang')) || 'en' };
+
+  setLang(lang) {
+    localStorage.setItem('ham_lang', lang);
+    this.setState({ lang });
+  }
+
+  renderVals() {
+    const t = T[this.state.lang];
+    return {
+      ...t,
+      enBg: this.state.lang === 'en' ? '#fff' : 'transparent',
+      enColor: this.state.lang === 'en' ? '#111' : '#fff',
+      trBg: this.state.lang === 'tr' ? '#fff' : 'transparent',
+      trColor: this.state.lang === 'tr' ? '#111' : '#fff',
+      setEn: () => this.setLang('en'),
+      setTr: () => this.setLang('tr')
+    };
+  }
+}
+</script>
+</body>
+</html>
